@@ -1,0 +1,12 @@
+body {
+    background-image: url(../images/frontier.background.jpg);
+    background-size: cover;
+}
+
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
