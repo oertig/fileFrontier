@@ -10,6 +10,8 @@ session_start();
 include_once('./config.inc.php');
 include_once('./modules/database.module.php');
 
+// TODO: create i18n file
+
 if(isset($_POST['logout'])) {
     session_destroy();
 
@@ -35,6 +37,7 @@ if(isset($_POST['logout'])) {
         } else {
             // login info is incorrect
             // TODO: return to login page (show error message)
+            $_SESSION['loginError'] = true;
         }
 
     } else {
@@ -49,7 +52,11 @@ if(isset($_POST['logout'])) {
     $skeleton = file_get_contents('./templates/skeleton.template.html');
     $content = file_get_contents('./templates/login.template.html');
     $skeleton = str_replace('{{CONTENT}}', $content, $skeleton);
+    $skeleton = str_replace('{{LOGIN_MESSAGE_CLASS}}', ( $_SESSION['loginError'] ? 'd-block' : 'd-none' ), $skeleton);
     echo $skeleton;
+
+    $_SESSION['loginError'] = false;
+    die;
 }
 
 ?>
